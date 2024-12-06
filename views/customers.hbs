@@ -1,0 +1,75 @@
+<!-- customers.hbs -->
+<title>Customers</title><link rel="stylesheet" href="css/style.css">
+<a href="/">Home</a> | 
+<a href="/campgrounds">Campgrounds</a> |
+<a href="/sites">Sites</a> | 
+<a href="/reservations">Reservations</a>
+<br>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<h2>Customer</h2>
+{{!-- Create a table --}}
+<table id="customers-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the variables, in order --}}
+        {{#each data}}
+        <tr data-value={{this.CustomerId}}>
+            <td>{{this.CustomerId}}</td>
+            <td>{{this.FirstName}}</td>
+            <td>{{this.LastName}}</td>
+            <td>{{this.CustomerEmail}}</td>
+            <td>{{this.CustomerPhone}}</td>
+            <td><button onclick="deleteCustomer({{this.CustomerId}})">delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_customer.js"></script>
+
+<!-- /views/customers.hbs -->
+
+<h2>Add a Customer</h2>
+<p>Add Campground information below and click `Submit`.</p>
+<form id="add-customer-form" method="POST" action="/add-customer-form">
+    <label for="input-first-name">First Name: </label>
+    <input type="text" name="input-first-name" id="input-first-name">
+    <br>
+    <label for="input-last-name">Last Name: </label>
+    <input type="text" name="input-last-name" id="input-last-name">
+    <br>
+    <label for="input-email">Email: </label>
+    <input type="text" name="input-email" id="input-email">
+    <br>
+    <label for="input-phone">Phone: </label>
+    <input type="text" name="input-phone" id="input-phone">
+    <br>
+    <input type="submit">
+</form>
+
+<h2>Search a Customer</h2>
+{{!-- using the route 'action='/customers' --}}
+<form id="search-customer-html" method='GET' action='/customers'> 
+    <label for="input-LastName">Enter Last Name: </label>
+    <input type="text" name="LastName" id="input-LastName-html-search">
+    
+    <input type="submit">
+    <a href='/customers'><button>Reset</button></a>
+</form>

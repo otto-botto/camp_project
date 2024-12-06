@@ -1,0 +1,125 @@
+
+<!-- campgrounds.hbs -->
+<title>Campgrounds</title><link rel="stylesheet" href="css/style.css">
+<a href="/">Home</a> | 
+<a href="/customers">Customers</a> | 
+<a href="/sites">Campground Sites</a> | 
+<a href="/reservations">Reservations</a>
+<br>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<h2>Campgrounds</h2>
+{{!-- Create a table --}}
+<table id="campgrounds-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Sites</th>
+            <th>State</th>
+            <th>Town</th>
+            <th>Distance</th>
+            <th>Longitude</th>
+            <th>Latitude</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the variables, in order --}}
+        {{#each data}}
+        <tr data-value={{this.CampgroundId}}>
+            <td>{{this.CampgroundId}}</td>
+            <td>{{this.CampgroundName}}</td>
+            <td>{{this.CampgroundPhone}}</td>
+            <td>{{this.NumberOfSites}}</td>
+            <td>{{this.CampgroundState}}</td>
+            <td>{{this.ClosestTown}}</td>
+            <td>{{this.DistanceToTown}}</td>
+            <td>{{this.Longitude}}</td>
+            <td>{{this.Latitude}}</td>
+            <td><button onclick="deleteCampground({{this.CampgroundId}})">delete</button></td>
+
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_campground.js"></script>
+
+<!-- /views/campgrounds.hbs -->
+
+<h2>Add A Campground</h2>
+<p>Add Campground information below and click `Submit`.</p>
+<form id="add-campground-form" method="POST" action="/add-campground-form">
+    <label for="input-name">Campground Name: </label>
+    <input type="text" name="input-name" id="input-name">
+    <br>
+    <label for="input-phone">Phone: </label>
+    <input type="text" name="input-phone" id="input-phone">
+    <br>
+    <label for="input-sites">Number of Sites: </label>
+    <input type="number" min="0" name="input-sites" id="input-sites">
+    <br>
+    <label for="input-state">State: </label>
+    <input type="text" name="input-state" id="input-state">
+    <br>
+    <label for="input-town">Town: </label>
+    <input type="text" name="input-town" id="input-town">
+    <br>
+    <label for="input-distance">Distance: </label>
+    <input type="number" step="0.001" min ="0" name="input-distance" id="input-distance">
+    <br>
+    <label for="input-longitude">Longitude: </label>
+    <input type="number" step="0.001" default ="0" name="input-longitude" id="input-longitude">
+    <br>
+    <label for="input-latitude">Latitude: </label>
+    <input type="number" step="0.001" default ="0" name="input-latitude" id="input-latitude">
+    <br>
+    <input type="submit">
+</form>
+
+<h2>Search a Campground</h2>
+{{!-- using the route 'action='/campgrounds' --}}
+<form id="search-campground-html" method='GET' action='/campgrounds'> 
+    <label for="input-CampgroundName">Enter Campground Name: </label>
+    <input type="text" name="CampgroundName" id="input-CampgroundName-html-search">
+    
+    <input type="submit">
+    <a href='/campgrounds'><button>Reset</button></a>
+</form>
+
+
+{{!-- <h2>Updating A User's HomeWorld Form</h2>
+<p>To update a specific user's homeworld select their name from the drop-down menu on the left and their desired homeworld from the drop down menu on the right</p>
+<form id="update-person-form-ajax">
+
+    <label for="input-fullname">Full name: </label>
+    <select name="input-fullname" id="mySelect">
+        <option value="test">Select a Person</option>
+        {{#each data}}
+        <option value="{{this.id}}">{{this.fname}} {{this.lname}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-homeworld">Homeworld: </label>
+    <select name="input-homeworld" id="input-homeworld-update">
+        <option>Select a Planet</option>
+        {{#each planets}}
+        <option value="{{this.id}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+    <input type="submit">
+
+</form>
+
+<script src="./js/update_person.js"></script> --}}
+

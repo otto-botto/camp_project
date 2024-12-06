@@ -1,0 +1,55 @@
+<!-- sites.hbs -->
+<title>Campground Sites</title><link rel="stylesheet" href="css/style.css">
+<a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/campgrounds">Campgrounds</a> | 
+<a href="/reservations">Reservations</a>
+<br>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<h2>Campground Sites</h2>
+{{!-- Create a table --}}
+<table id="sites-table">
+
+    {{!-- Header section --}}
+    <thead>
+        <tr>
+            <th>Site ID</th>
+            <th>Campsite</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+        {{!-- For each row, print the variables, in order --}}
+        {{#each data}}
+        <tr data-value={{this.SiteId}}>
+            <td >{{this.SiteId}}</td>
+            <td>{{this.CampgroundName}} - No. {{this.SiteNumber}}</td>
+            <td><button onclick="deleteSite({{this.SiteId}})">delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_site.js"></script>
+
+
+<!-- /views/sites.hbs -->
+
+<h2>Add a Site</h2>
+<p>Add Site information below and click `Submit`.</p>
+<form id="add-site-form" method="POST" action="/add-site-form">
+    
+    <select name="input-campground" id="input-campground">
+        <option value="">Select a Campground</option>
+        {{#each campgrounds}}
+        <option value="{{this.CampgroundId}}">{{this.CampgroundName}}</option>
+        {{/each}}
+    </select>
+    <br>
+    
+    <label for="input-site-number">Site Number: </label>
+    <input type="number" min="0" name="input-site-number" id="input-site-number">
+    <br>
+    
+    <input type="submit">
+</form>

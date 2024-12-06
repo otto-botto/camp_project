@@ -1,0 +1,90 @@
+<!-- reservations.hbs -->
+<title>Reservations</title><link rel="stylesheet" href="css/style.css">
+<a href="/">Home</a> | 
+<a href="/campgrounds">Campgrounds</a> | 
+<a href="/customers">Customers</a> | 
+<a href="/sites">Campground Sites</a>
+<br>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<h2>Reservations</h2>
+
+{{!-- Create a table --}}
+<table id="reservations-table">
+
+    {{!-- Header section --}}
+    <thead>
+        <tr>
+            <th>Reservation ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Site Number</th>
+            <th>Campground</th>
+            <th>Start Date</th>
+            <th>End Date</th> 
+            <th></th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the variables, in order --}}
+        {{#each data}}
+        <tr data-value={{this.ReservationId}}>
+             <td>{{this.ReservationId}}</td>
+            <td >{{this.FirstName}}</td>
+            <td >{{this.LastName}}</td>
+            <td>{{this.SiteNumber}}</td>
+            <td>{{this.CampgroundName}}</td>
+            <td>{{this.ReservationStart}}</td>
+            <td>{{this.ReservationEnd}}</td>
+            <td><button onclick="deleteReservation({{this.ReservationId}})">delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_reservation.js"></script>
+
+
+<!-- /views/reservations.hbs -->
+
+<h2>Add a Reservation</h2>
+<p>Add Reservation information below and click `Submit`.</p>
+<form id="add-reservation-form" method="POST" action="/add-reservation-form">
+    
+    <select name="input-customer" id="input-customer">
+        <option value="">Select a Customer</option>
+        {{#each customers}}
+        <option value="{{this.CustomerId}}">{{this.FirstName}} {{this.LastName}}</option>
+        {{/each}}
+    </select>
+    <br>
+
+    <select name="input-campground" id="input-campground">
+        <option value="">Select a Campground</option>
+        {{#each campgrounds}}
+        <option value="{{this.CampgroundId}}">{{this.CampgroundName}}</option>
+        {{/each}}
+    </select>
+    <br>
+
+    <select name="input-site" id="input-site">
+        <option value="">Select a Site Number</option>
+        {{#each sites}}
+        <option value="{{this.site}}">{{this.name}} - No.{{this.site}}</option>
+        {{/each}}
+    </select>
+    <br>
+
+    <label for="input-start">Start Date: </label>
+    <input type="date" name="input-start" id="input-start">
+    <br>
+
+
+    <label for="input-end">End Date: </label>
+    <input type="date" name="input-end" id="input-end">
+    <br>
+
+    <input type="submit">
+</form>
