@@ -54,7 +54,7 @@ app.get('/campgrounds', function(req, res)
 app.get('/customers', function(req, res)
 {
     // Declare Query 1
-    let query;
+    let query1;
     // If there is no query string, perform SELECT
     if (req.query.LastName === undefined)
         {
@@ -63,7 +63,7 @@ app.get('/customers', function(req, res)
 // If there is a query string, assume it's from search and return the appropriate result
     else
         {
-        query1 = `SELECT * FROM Customers WHERE LastName LIKE '${req.query.LastName}%';`
+            query1 = `SELECT * FROM Customers WHERE LastName LIKE '${req.query.LastName}%';`
         
         }    
     
@@ -78,11 +78,26 @@ app.get('/customers', function(req, res)
 
 app.get('/sites', function(req, res)
 {
-    // Q1 to show what we want for Sites: Camp name, site ID, and site number
-    let query1 = `select Campgrounds.CampgroundName, CampgroundSites.SiteId, CampgroundSites.SiteNumber 
+    let query1;
+
+    if(req.query.CampgroundName === undefined){
+        qiery1 = `select Campgrounds.CampgroundName, CampgroundSites.SiteId, CampgroundSites.SiteNumber 
                 from Campgrounds
                 join CampgroundSites on CampgroundSites.GroundSiteId = Campgrounds.CampgroundId  
                 order by Campgrounds.CampgroundName;`;
+    }
+    
+    else{
+        query1 = `select Campgrounds.CampgroundName, CampgroundSites.SiteId, CampgroundSites.SiteNumber
+                from Campgrounds
+                join CampgroundSites on CampgroundSites.GroundSiteId = Campgrounds.CampgroundId
+                where CampgroundName like '${req.query.CampgroundName}%'
+                order by Campgrounds.CampgroundName;`;   
+    }
+
+    console.log("////////////");
+    console.log(query1);
+    console.log("////////////");
     // Q2 to add Campground drop down for adding 
     let query2 = `SELECT CampgroundId, CampgroundName FROM Campgrounds;`
 
@@ -117,7 +132,8 @@ app.get('/reservations', function(req, res){
     // Q1 to show what we want for Reservations: reservation id, customer id, site id, and campground name
     let query1 = `select SiteReservations.ReservationId, Customers.FirstName, Customers.LastName, 
                     CampgroundSites.SiteNumber, 
-                    Campgrounds.CampgroundName, SiteReservations.ReservationStart, SiteReservations.ReservationEnd 
+                    Campgrounds.CampgroundName, SiteReservations.ReservationStart, SiteReservations.ReservationEnd,
+                    SiteReservations.ReservationTimestamp 
                     from CampgroundSites
                     join SiteReservations on SiteReservations.SiteReservationId = CampgroundSites.SiteId
                     join Customers on Customers.CustomerId = SiteReservations.CustReservationId
@@ -410,41 +426,157 @@ app.delete('/delete-reservation-ajax/', function(req,res,next){
         })          
 });
 
-// app.put('/put-person-ajax', function(req,res,next){                                   
-//   let data = req.body;
+// --- UPDATE ---
 
-//   let homeworld = parseInt(data.homeworld);
-//   let person = parseInt(data.fullname);
+// Update campground
+app.post('/update-campground-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+    let id = parseInt(data['input-camp']);
 
-//   queryUpdateWorld = `UPDATE bsg_people SET homeworld = ? WHERE bsg_people.id = ?`;
-//   selectWorld = `SELECT * FROM bsg_planets WHERE id = ?`
+    console.log("***************");
+    console.log(id);
+    console.log("***************");
 
-//         // Run the 1st query
-//         db.pool.query(queryUpdateWorld, [homeworld, person], function(error, rows, fields){
-//             if (error) {
 
-//             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-//             console.log(error);
-//             res.sendStatus(400);
-//             }
+    let querySelectCampground = `SELECT * FROM Campgrounds WHERE CampgroundId = ${id};`;
+    console.log("%%%%%%%%%%%%%%%%%%");
+    console.log(querySelectCampground);
+    console.log("%%%%%%%%%%%%%%%%%%");
+ 
+    // Create the query and run it on the database
+    db.pool.query(querySelectCampground, function(error, rows, fields){
+        // console.log(rows[0]);
+ 
+        // Check to see if there was an error
+        if (error) {
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            let phone = rows[0].CampgroundPhone;
+            let sites = rows[0].NumberOfSites;
+            let state = rows[0].CampgroundState;
+            let town = rows[0].ClosestTown;
+            let dist = rows[0].DistanceToTown;
+            let long = rows[0].Longitude;
+            let lat = rows[0].Latitude;
+            
+            if (data['update-phone'] !== undefined){
+                phone = data['update-phone']
+            };
 
-//             // If there was no error, we run our second query and return that data so we can use it to update the people's
-//             // table on the front-end
-//             else
-//             {
-//                 // Run the second query
-//                 db.pool.query(selectWorld, [homeworld], function(error, rows, fields) {
-        
-//                     if (error) {
-//                         console.log(error);
-//                         res.sendStatus(400);
-//                     } else {
-//                         res.send(rows);
-//                     }
-//                 })
-//             }
-// })});
+            if (data['update-sites'] !== undefined){
+                sites = data['update-sites']
+            };
 
+            if (data['update-state'] !== undefined){
+                state = data['update-state']
+            };
+
+            if (data['update-town'] !== undefined){
+                town = data['update-town']
+            };
+
+            if (data['update-distance'] !== undefined){
+                dist = parseFloat(data['update-distance'])
+            };
+            if (data['update-longitude'] !== undefined){
+                long = parseFloat(data['update-longitude'])
+            };
+            if (data['update-latitude'] !== undefined){
+                lat = parseFloat(data['update-latitude'])
+            };
+            
+            let queryUpdateCampground = `UPDATE Campgrounds 
+                                        SET CampgroundPhone = '${phone}',
+                                        NumberOfSites = ${sites},
+                                        CampgroundState = '${state}',
+                                        ClosestTown = '${town}',
+                                        DistanceToTown = ${dist},
+                                        Longitude = ${long},
+                                        Latitude = ${lat} 
+                                        WHERE CampgroundId = ${id};`;
+            
+            // console.log("^^^^^^^^^^^^^^^^^^^^^^^^");
+            // console.log(queryUpdateCampground);
+            // console.log("^^^^^^^^^^^^^^^^^^^^^^^^");
+                                   
+            db.pool.query(queryUpdateCampground, function(error, rows, fields){
+                if (error) {
+                    console.log(error)
+                    res.sendStatus(400);
+                }
+                else {
+                    res.redirect('/campgrounds');
+                }
+        })}
+    })}
+);
+
+//Update a customer's information
+app.post('/update-customer-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+    let id = parseInt(data['input-name']);
+
+    console.log("***************");
+    console.log(id);
+    console.log("***************");
+ 
+    let querySelectCustomer = `SELECT * FROM Customers WHERE CustomerId = ${id};`;
+    console.log("%%%%%%%%%%%%%%%%%%");
+    console.log(querySelectCustomer);
+    console.log("%%%%%%%%%%%%%%%%%%");
+ 
+    // Create the query and run it on the database
+    db.pool.query(querySelectCustomer, function(error, rows, fields){
+ 
+        // Check to see if there was an error
+        if (error) {
+ 
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+ 
+        else
+        {
+            let phone = rows[0].CustomerPhone
+            let email = rows[0].CustomerEmail
+ 
+            if (data['input-phone'] !== undefined){
+                phone = data['input-phone']
+            };
+ 
+            if (data['input-email'] !== undefined){
+                email = data['input-email']
+            };
+ 
+            let queryUpdateCustomer = `UPDATE Customers SET CustomerPhone = '${phone}', CustomerEmail = '${email}'
+                                    WHERE CustomerId = ${id};`;
+            
+            console.log(queryUpdateCustomer);                       
+            db.pool.query(queryUpdateCustomer, function(error, rows, fields){
+ 
+                // Check to see if there was an error
+                if (error) {
+       
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error)
+                    res.sendStatus(400);
+                }
+ 
+                // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM Customers and
+                // presents it on the screen
+                else {
+                    res.redirect('/customers');
+                }
+        })}
+    })}
+);
 
 
 /*

@@ -73,3 +73,53 @@
     <input type="submit">
     <a href='/customers'><button>Reset</button></a>
 </form>
+
+<h2>Update a Customer</h2>
+
+<form id="update-customer-form" method="POST" action="/update-customer-form">
+
+    <label for="input-name">Name: </label>
+    <select name="input-name" id="input-name">
+        <option value="test">Select a Customer</option>
+        {{#each data}}
+        <option value='{{this.CustomerId}}'>{{this.FirstName}} {{this.LastName}}</option>
+        {{/each}}
+    </select>
+
+    {{!-- **** Works with commented out query in app.js*** --}}
+
+    {{!-- <label for="input-fname">First Name: </label>
+    <select name="input-fname" id="input-fname">
+        <option value="test">Select First Name</option>
+        {{#each data}}
+        <option value="{{this.FirstName}}">{{this.FirstName}}</option>
+        {{/each}}
+    </select>  --}}
+
+    {{!-- <label for="input-lname">Last Name: </label>
+    <select name="input-lname" id="input-lname">
+        <option value="test">Select Last Name</option>
+        {{#each data}}
+        <option value="{{this.LastName}}">{{this.LastName}}</option>
+        {{/each}}
+    </select>  --}}
+
+    {{!-- <label for="input-fname">First Name: </label>
+    <input type="text" name="input-fname" id="input-fname"> --}}
+    
+    {{!-- <label for="input-lname">Last Name: </label>
+    <input type="text" name="input-lname" id="input-lname"> --}}
+    <br>
+    <h3>Update Fields</h3>
+    
+    <label for="input-fname">Phone: </label>
+    <input type="text" name="input-phone" id="input-phone">
+    <br>
+
+    <label for="input-email">Email: </label>
+    <input type="text" name="input-email" id="input-email">
+    <br>
+    
+    <input type="submit">
+
+</form>

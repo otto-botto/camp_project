@@ -21,7 +21,8 @@
             <th>Site Number</th>
             <th>Campground</th>
             <th>Start Date</th>
-            <th>End Date</th> 
+            <th>End Date</th>
+            <th>Reservation Made</th> 
             <th></th>
         </tr>
     </thead>
@@ -39,6 +40,7 @@
             <td>{{this.CampgroundName}}</td>
             <td>{{this.ReservationStart}}</td>
             <td>{{this.ReservationEnd}}</td>
+            <td>{{this.ReservationTimestamp}}</td>
             <td><button onclick="deleteReservation({{this.ReservationId}})">delete</button></td>
         </tr>
         {{/each}}

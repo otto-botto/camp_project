@@ -98,28 +98,49 @@
 </form>
 
 
-{{!-- <h2>Updating A User's HomeWorld Form</h2>
-<p>To update a specific user's homeworld select their name from the drop-down menu on the left and their desired homeworld from the drop down menu on the right</p>
-<form id="update-person-form-ajax">
+<h2>Update Campground</h2>
+<form id="update-campground-form" method="POST" action="/update-campground-form">
 
-    <label for="input-fullname">Full name: </label>
-    <select name="input-fullname" id="mySelect">
-        <option value="test">Select a Person</option>
+     <label for="input-camp">Name: </label>
+    <select name="input-camp" id="input-camp">
+        <option value="test">Select a Campground</option>
         {{#each data}}
-        <option value="{{this.id}}">{{this.fname}} {{this.lname}}</option>
+        <option value='{{this.CampgroundId}}'>{{this.CampgroundName}}</option>
         {{/each}}
     </select>
+    <br>
+    <h3>Update Fields</h3>
+    
+    <label for="update-phone">Phone: </label>
+    <input type="text" name="update-phone" id="update-phone">
+    <br>
 
-    <label for="input-homeworld">Homeworld: </label>
-    <select name="input-homeworld" id="input-homeworld-update">
-        <option>Select a Planet</option>
-        {{#each planets}}
-        <option value="{{this.id}}">{{this.name}}</option>
-        {{/each}}
-    </select>
+    <label for="update-sites">Sites: </label>
+    <input type="number" min="0" name="update-sites" id="update-sites">
+    <br>
+    
+    <label for="update-state">State: </label>
+    <input type="text" name="update-state" id="update-state">
+    <br>
+
+    <label for="update-town">Town: </label>
+    <input type="text"  name="update-town" id="update-town">
+    <br>
+
+    <label for="update-distance">Distance: </label>
+    <input type="number" step="0.001" min="0" name="update-distance" id="update-distance">
+    <br>
+
+    <label for="update-longitude">Longitude: </label>
+    <input type="number" step="0.001" name="update-longitude" id="update-longitude">
+    <br>
+
+    <label for="update-latitude">Latitude: </label>
+    <input type="number" step="0.001" name="update-latitude" id="update-latitude">
+    <br>
+
     <input type="submit">
 
 </form>
 
-<script src="./js/update_person.js"></script> --}}
 

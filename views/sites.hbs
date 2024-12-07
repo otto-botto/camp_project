@@ -6,7 +6,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <h2>Campground Sites</h2>
-{{!-- Create a table --}}
 <table id="sites-table">
 
     {{!-- Header section --}}
@@ -32,8 +31,15 @@
 </table>
 <script src="./js/delete_site.js"></script>
 
-
-<!-- /views/sites.hbs -->
+<h2>Search a Site</h2>
+{{!-- using the route 'action='/sites' --}}
+<form id="search-site-html" method='GET' action='/sites'> 
+    <label for="input-CampgroundName">Enter Campground Name: </label>
+    <input type="text" name="CampgroundName" id="input-CampgroundName-html-search">
+    
+    <input type="submit">
+    <a href='/campgrounds'><button>Reset</button></a>
+</form>
 
 <h2>Add a Site</h2>
 <p>Add Site information below and click `Submit`.</p>

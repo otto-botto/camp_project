@@ -1,16 +1,17 @@
 {
-  "name": "cs340guide",
+  "name": "Bobby Tables Cmaping Co",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Anthony Corton",
+  "author": "Lora Dushanova and Sasha Richards",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.2",
     "express-handlebars": "^6.0.7",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "nodemon": "^3.1.7"
   }
 }
