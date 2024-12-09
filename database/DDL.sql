@@ -90,13 +90,13 @@ VALUES
     ('Anastasia', 'Vinogradova', 'anyakoshka@email.com', "5095230163");
 
 INSERT INTO Campgrounds (CampgroundName, CampgroundPhone, CampgroundState, ClosestTown, DistanceToTown, Longitude, Latitude)
-VALUES ('Fox Creek', "202.784.1511", 16, 'WA', 'Ardenvoir', 14.60, -120.511, 47.925);
+VALUES ('Fox Creek', "2027841511", 16, 'WA', 'Ardenvoir', 14.60, -120.511, 47.925);
 
 INSERT INTO Campgrounds (CampgroundName, CampgroundPhone, CampgroundState, ClosestTown, DistanceToTown, Longitude, Latitude)
-VALUES ('Lynx Pass', "970.638.4516", 11, 'CO', 'Toponas', 5.9, -106.699, 40.078);
+VALUES ('Lynx Pass', "9706384516", 11, 'CO', 'Toponas', 5.9, -106.699, 40.078);
 
 INSERT INTO Campgrounds (CampgroundName, CampgroundPhone, CampgroundState, ClosestTown, DistanceToTown, Longitude, Latitude)
-VALUES ('Hobo Gulch', "530.623.2121", 10, 'CA', 'Junction City', 14.5, -123.153, 40.929);
+VALUES ('Hobo Gulch', "5306232121", 10, 'CA', 'Junction City', 14.5, -123.153, 40.929);
 
 INSERT INTO CampgroundSites (GroundSiteId, SiteNumber)
 VALUES ((SELECT CampgroundId FROM Campgrounds WHERE CampgroundId=1), 1);
