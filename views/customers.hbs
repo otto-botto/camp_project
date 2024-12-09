@@ -1,3 +1,9 @@
+{{!-- 
+// Citation:The code setup here stems from CS 340 starter code for node js.
+// website: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+// Submission date: 12/09/2024
+// Group 07: Lora Dushanova and Sasha Richards --}}
+
 <!-- customers.hbs -->
 <title>Customers</title><link rel="stylesheet" href="css/style.css">
 <a href="/">Home</a> | 
@@ -45,24 +51,26 @@
 <script src="./js/delete_customer.js"></script>
 
 <!-- /views/customers.hbs -->
-
+<div>
 <h2>Add a Customer</h2>
-<p>Add Campground information below and click `Submit`.</p>
-<form id="add-customer-form" method="POST" action="/add-customer-form">
-    <label for="input-first-name">First Name: </label>
-    <input type="text" name="input-first-name" id="input-first-name">
+<h3>Add Customer information below and click `Submit`.</h3>
+<form onsubmit="preventEmptyNameAdd()" id="add-customer-form" method="POST" action="/add-customer-form">
+    <label for="input-first-name-add">First Name: </label>
+    <input type="text" name="input-first-name-add" id="input-first-name-add">
     <br>
-    <label for="input-last-name">Last Name: </label>
-    <input type="text" name="input-last-name" id="input-last-name">
+    <label for="input-last-name-add">Last Name: </label>
+    <input type="text" name="input-last-name-add" id="input-last-name-add">
     <br>
-    <label for="input-email">Email: </label>
-    <input type="text" name="input-email" id="input-email">
+    <label for="input-email-add">Email: </label>
+    <input type="text" name="input-email-add" id="input-email-add">
     <br>
-    <label for="input-phone">Phone: </label>
-    <input type="text" name="input-phone" id="input-phone">
+    <label for="input-phone-add">Phone: </label>
+    <input type="text" name="input-phone-add" id="input-phone-add">
     <br>
     <input type="submit">
 </form>
+<script src="./js/prevent_empty_name.js"></script>
+</div>
 
 <h2>Search a Customer</h2>
 {{!-- using the route 'action='/customers' --}}
@@ -74,50 +82,30 @@
     <a href='/customers'><button>Reset</button></a>
 </form>
 
-<h2>Update a Customer</h2>
 
+<h2>Update a Customer</h2>
+<h3>Select the Customer's name:</h3>
 <form id="update-customer-form" method="POST" action="/update-customer-form">
 
-    <label for="input-name">Name: </label>
-    <select name="input-name" id="input-name">
+    <label for="input-name-menu">Name: </label>
+    <div class="select">
+    <select name="input-name-menu" id="input-name-menu">
         <option value="test">Select a Customer</option>
         {{#each data}}
         <option value='{{this.CustomerId}}'>{{this.FirstName}} {{this.LastName}}</option>
         {{/each}}
     </select>
-
-    {{!-- **** Works with commented out query in app.js*** --}}
-
-    {{!-- <label for="input-fname">First Name: </label>
-    <select name="input-fname" id="input-fname">
-        <option value="test">Select First Name</option>
-        {{#each data}}
-        <option value="{{this.FirstName}}">{{this.FirstName}}</option>
-        {{/each}}
-    </select>  --}}
-
-    {{!-- <label for="input-lname">Last Name: </label>
-    <select name="input-lname" id="input-lname">
-        <option value="test">Select Last Name</option>
-        {{#each data}}
-        <option value="{{this.LastName}}">{{this.LastName}}</option>
-        {{/each}}
-    </select>  --}}
-
-    {{!-- <label for="input-fname">First Name: </label>
-    <input type="text" name="input-fname" id="input-fname"> --}}
-    
-    {{!-- <label for="input-lname">Last Name: </label>
-    <input type="text" name="input-lname" id="input-lname"> --}}
-    <br>
-    <h3>Update Fields</h3>
-    
-    <label for="input-fname">Phone: </label>
-    <input type="text" name="input-phone" id="input-phone">
+    </div>
     <br>
 
-    <label for="input-email">Email: </label>
-    <input type="text" name="input-email" id="input-email">
+    <h3>You can enter only fields that need to be changed and press Submit:</h3>
+    
+    <label for="input-phone-update">Phone: </label>
+    <input type="text" name="input-phone-update" id="input-phone-update">
+    <br>
+
+    <label for="input-email-update">Email: </label>
+    <input type="text" name="input-email-update" id="input-email-update">
     <br>
     
     <input type="submit">

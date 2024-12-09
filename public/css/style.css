@@ -1,0 +1,147 @@
+/* Citation: The code setup here stems from out css templates from CS290 
+The setup of the drop-down menus is somewhat based on the following resource,
+whihc helped us add the same font as the remainder of the UI when selecting an
+item: https://moderncss.dev/custom-select-styles-with-pure-css/
+Submission date: 12/09/2024
+Group 07: Lora Dushanova and Sasha Richards*/
+body {
+    font-family: Andale Mono, monospace;
+    font-style: normal;
+    margin: 0;
+    padding: 0.25em 0.5em;;
+    background-color: #f0f4ff;
+}
+
+h1 {
+    color: #a8b2b3;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #767d76;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #767d7d;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 5px;
+    box-shadow: 0 2px 5px #1a1b4b; 
+}
+
+th{
+    background-color: #767d7d; 
+    color: #f0f4ff; 
+    padding: 0.25em 0.5em;
+}
+
+
+td{
+    text-align: left; 
+    border: 1px solid #a8b2b3;
+    padding-left: 0.5em;
+}
+
+a {
+    color: #1e3eee;
+}
+
+form {
+    margin: 10px 0;
+    padding: 0.25em 0.5em;
+    background-color: #f0f4ff;
+    border-radius: 0.25em;; 
+    box-shadow: 0 2px 5px #1a1b4b; 
+}
+
+.fields {
+    margin-bottom: 10px;
+}
+label {
+    display:block;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+textarea {
+    font-family: Andale Mono, monospace;
+    font-style: normal;
+    margin: 0;
+}
+textarea,
+select,
+input[type="textarea"],
+input[type="text"],
+input[type="date"],
+input[type="number"] {
+    padding: 0.25em 0.5em;
+    border: 1px solid #a8b2b3;
+    border-radius: 0.25em;;
+    width: 50%;
+}
+
+input[type="date"]{
+    padding: 0.25em 0.5em;
+    border: 1px solid #a8b2b3;
+    border-radius: 0.25em;;
+    width: 15%;
+}
+
+input[type="submit"],
+button
+{
+    font-family: Andale Mono, monospace;
+    font-size:medium;
+    background-color: #767d7d;
+    color: #f0f4ff;
+    padding: 0.25em 0.5em;
+    border-radius: 0.25em;;
+    cursor: pointer;
+    margin: 5px;
+}
+
+select {
+    /* A reset of styles, including removing the default dropdown arrow */
+    appearance: none;
+    /* Additional resets */
+    background-color: transparent;
+    font-family: inherit;
+    font-style: normal;
+    cursor: inherit;
+    line-height: inherit;
+  }
+
+  .select {
+    width: 100%;
+    min-width: 15ch;
+    max-width: 45ch;
+    border-radius: 0.25em;
+    padding: 0.25em 0.5em;
+    font-size: 1.25rem;
+    cursor: pointer;
+    line-height: 1.5;
+    background-color: transparent;
+    display:grid;
+    align-items: center;
+  }
+
+  option {
+    appearance: none;
+    font-family: inherit;
+    font-style: normal;
+  }
+
+  .option {
+    font-family: Andale Mono, monospace;
+  }
+
+

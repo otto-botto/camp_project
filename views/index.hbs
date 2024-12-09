@@ -1,6 +1,35 @@
+{{!-- 
+// Citation:The code setup here stems from CS 340 starter code for node js.
+// website: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+// Submission date: 12/09/2024
+// Group 07: Lora Dushanova and Sasha Richards --}}
 <!-- index.hbs -->
-<title>Home</title><link rel="stylesheet" href="css/style.css">
-<a href="/customers">Customers</a> | 
-<a href="/campgrounds">Campgrounds</a> | 
-<a href="/sites">Campground Sites</a> | 
-<a href="/reservations">Reservations</a>
+<head>
+<title>Home</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <h1> Entity Description </h1>
+    </header>
+
+    <main>
+        <ul>
+            <li>
+                <a href="/campgrounds">Campgrounds</a> - Record of all campgrounds in the U.S.A.
+            </li>
+            <li>
+                <a href="/customers">Customers</a> - All existing customers. 
+            </li>
+            <li>
+                <a href="/sites">Sites</a> - All reservable sites by campground. 
+            </li>
+            <li>
+                <a href="/reservations">Reservations</a> - Current and past reservations. An associative table for the M:N relationship between Customers and Campgrounds.  
+            </li>
+        </ul>
+</main>
+</body>     
+
+    <footer>&copy; 2024 Bobby Tables Camping Co</footer>  

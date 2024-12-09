@@ -1,9 +1,15 @@
+{{!-- 
+// Citation:The code setup here stems from CS 340 starter code for node js.
+// website: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+// Submission date: 12/09/2024
+// Group 07: Lora Dushanova and Sasha Richards --}}
+
 <!-- reservations.hbs -->
 <title>Reservations</title><link rel="stylesheet" href="css/style.css">
 <a href="/">Home</a> | 
 <a href="/campgrounds">Campgrounds</a> | 
 <a href="/customers">Customers</a> | 
-<a href="/sites">Campground Sites</a>
+<a href="/sites">Sites</a>
 <br>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -48,12 +54,20 @@
 </table>
 <script src="./js/delete_reservation.js"></script>
 
+<h2>Search a Reservation</h2>
 
-<!-- /views/reservations.hbs -->
+<form id="search-reservation-html" method='GET' action='/reservations'> 
+    <label for="input-LastdName">Enter Last Name: </label>
+    <input type="text" name="LastName" id="input-LastName-html-search">
+    
+    <input type="submit">
+    <a href='/reservations'><button>Reset</button></a>
+</form>
+
 
 <h2>Add a Reservation</h2>
 <p>Add Reservation information below and click `Submit`.</p>
-<form id="add-reservation-form" method="POST" action="/add-reservation-form">
+<form onsubmit="preventEmptyDateAdd()" id="add-reservation-form" method="POST" action="/add-reservation-form">
     
     <select name="input-customer" id="input-customer">
         <option value="">Select a Customer</option>
@@ -80,13 +94,47 @@
     <br>
 
     <label for="input-start">Start Date: </label>
-    <input type="date" name="input-start" id="input-start">
+    <input type="date" name="input-start-add" id="input-start-add">
     <br>
 
 
     <label for="input-end">End Date: </label>
-    <input type="date" name="input-end" id="input-end">
+    <input type="date" name="input-end-add" id="input-end-add">
     <br>
 
     <input type="submit">
 </form>
+<script src="./js/prevent_empty_date.js"></script>
+
+{{! --- Select a customer to retrieve reservations --- }}    
+{{! --- Form to update a customer's reservation --- }}
+<h2>Update a Reservation</h2>
+<h3>Select the Customer and Reservation No.:</h3>
+
+<form onsubmit="preventEmptyDateUpdate()" id="update-reservation-form" 
+    method="POST" action="/update-reservation-form" >
+
+    <p>Choose a reservation ID to update reservation information</p>
+    <p>Fill out the forms below to update reservation information below and click `Submit`.</p>
+
+    <label for="input-reservationId">Select a Reservation</label>
+    <select name="input-reservationId" id="input-reservationId">
+        <option value="test">Select a Reservation</option>
+        {{#each data}}
+        <option value='{{this.ReservationId}}'>{{this.FirstName}} {{this.LastName}}- Reservation No.{{this.ReservationId}}</option>
+        {{/each}}
+    </select>
+    <br>
+
+
+    <label for="input-start-update">Start Date: </label>
+    <input type="date" name="input-start-update" id="input-start-update">
+    <br>
+
+    <label for="input-end">End Date: </label>
+    <input type="date" name="input-end-update" id="input-end-update">
+    <br>
+
+    <input type="submit">
+</form>
+<script src="./js/prevent_empty_date.js"></script>

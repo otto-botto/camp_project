@@ -1,9 +1,14 @@
+{{!-- 
+// Citation:The code setup here stems from CS 340 starter code for node js.
+// website: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+// Submission date: 12/09/2024
+// Group 07: Lora Dushanova and Sasha Richards --}}
 
 <!-- campgrounds.hbs -->
 <title>Campgrounds</title><link rel="stylesheet" href="css/style.css">
 <a href="/">Home</a> | 
 <a href="/customers">Customers</a> | 
-<a href="/sites">Campground Sites</a> | 
+<a href="/sites">Sites</a> | 
 <a href="/reservations">Reservations</a>
 <br>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -58,7 +63,7 @@
 <!-- /views/campgrounds.hbs -->
 
 <h2>Add A Campground</h2>
-<p>Add Campground information below and click `Submit`.</p>
+<h3>Add Campground information below and click `Submit`.</h3>
 <form id="add-campground-form" method="POST" action="/add-campground-form">
     <label for="input-name">Campground Name: </label>
     <input type="text" name="input-name" id="input-name">
@@ -99,6 +104,7 @@
 
 
 <h2>Update Campground</h2>
+<h3>You can enter only fields that need to be changed:</h3>
 <form id="update-campground-form" method="POST" action="/update-campground-form">
 
      <label for="input-camp">Name: </label>
